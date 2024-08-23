@@ -7,7 +7,7 @@ project(MyProject LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Define the root directory variables
+# Define BUILD directory
 set(PROJECT_ROOT_DIR ${CMAKE_SOURCE_DIR})
 set(BUILD_DIR ${PROJECT_ROOT_DIR}/build)
 
@@ -15,14 +15,21 @@ set(BUILD_DIR ${PROJECT_ROOT_DIR}/build)
 include_directories(${PROJECT_ROOT_DIR}/CUTE)
 include_directories(${PROJECT_ROOT_DIR}/CUTE/cute)
 
+
 # Add the executable target for the main project
 add_executable(MyProject ${PROJECT_ROOT_DIR}/main.cc)
+
+# Link the executable with the library
+target_link_libraries(MyProject PRIVATE SourceLib)
 
 # Add the Google Test subdirectory
 add_subdirectory(googletest)
 
 # Add the TEST subdirectory
 add_subdirectory(TEST)
+
+# Add the subdirectory for the source code
+add_subdirectory(source)
 
 # Create custom targets to build either the main project or the tests
 add_custom_target(RunMyProject

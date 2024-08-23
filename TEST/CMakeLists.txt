@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(TEST_SOURCES
     #${CMAKE_CURRENT_SOURCE_DIR}/CuteTest.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/test.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/HelloTest.cc
     # Add more test files as needed
 )
 
@@ -22,10 +23,10 @@ target_include_directories(UNITTEST PRIVATE ${PROJECT_ROOT_DIR}/CUTE)
 target_include_directories(UNITTEST PRIVATE ${PROJECT_ROOT_DIR}/CUTE/cute)
 
 # Link Google Test libraries
-target_link_libraries(UNITTEST gtest gtest_main)
+target_link_libraries(UNITTEST gtest gtest_main SourceLib)
 
 # Enable testing
 enable_testing()
 
 # Register the tests with CTest
-add_test(NAME UnitTest COMMAND UNITTEST)
+#add_test(NAME UnitTest COMMAND UNITTEST)
