@@ -1,33 +1,42 @@
-#include "cute.h"
-#include "cute_equals.h"
-#include"cute_runner.h"
-#include "ostream_listener.h"
-#include "xml_listener.h"
-#include "ide_listener.h"
-#include "stdlib.h"
-#include <sstream>
-#include <unordered_map>
+#include <gtest/gtest.h>
 
-int lifeTheUniverseAndEverything = 6*7;
-
-TEST(myTest){
-    ASSERT_EQUAL(42, lifeTheUniverseAndEverything);
+// A dummy function to be tested
+int add(int a, int b) {
+    return a + b;
 }
 
-bool runSuite(cute::runner<cute::xml_listener<cute::ide_listener<>>> runner)
-{
-    cute::suite s{};
-    s += myTest();
-    return runner(s, "TestSuite");
+int subtract(int a, int b) {
+    return a - b;
 }
 
+// Test case for the add function
+TEST(AdditionTest, HandlesPositiveNumbers) {
+    EXPECT_EQ(add(1, 2), 3);
+    EXPECT_EQ(add(5, 7), 12);
+}
 
+TEST(AdditionTest, HandlesNegativeNumbers) {
+    EXPECT_EQ(add(-1, -2), -3);
+    EXPECT_EQ(add(-5, -7), -12);
+}
 
-int main(int argc, char const * argv[]){
-	cute::xml_file_opener cmlfile(argc, argv);
-    cute::xml_listener<cute::ide_listener<>> listener(os: xmlfile.out);
-    auto runner = cute::makeRunner(s: listener, argc, argv);
+TEST(AdditionTest, HandlesMixedSignNumbers) {
+    EXPECT_EQ(add(-1, 1), 0);
+    EXPECT_EQ(add(7, -3), 4);
+}
 
-    bool suiteResult = runSuite(runner);
-    return suiteResult ? EXIT_SUCCESS : EXIT_FAILURE;
+// Test case for the subtract function
+TEST(SubtractionTest, HandlesPositiveNumbers) {
+    EXPECT_EQ(subtract(10, 5), 5);
+    EXPECT_EQ(subtract(20, 15), 5);
+}
+
+TEST(SubtractionTest, HandlesNegativeNumbers) {
+    EXPECT_EQ(subtract(-10, -5), -5);
+    EXPECT_EQ(subtract(-20, -15), -5);
+}
+
+TEST(SubtractionTest, HandlesMixedSignNumbers) {
+    EXPECT_EQ(subtract(-10, 5), -15);
+    EXPECT_EQ(subtract(10, -5), 15);
 }
