@@ -1,4 +1,4 @@
-# CppKursSommerlad
+# Basic Cmake C++ Project
 
 
 #build project
